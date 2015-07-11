@@ -12,7 +12,7 @@ public class Tile {
 		
 		switch(id){
 		case 0:
-			tex= new Texture("dirt.jpg");
+			tex= new Texture("dirt_u.jpg");
 		}
 		
 		
