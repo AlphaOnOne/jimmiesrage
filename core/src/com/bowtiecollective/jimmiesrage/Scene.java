@@ -9,18 +9,17 @@ package com.bowtiecollective.jimmiesrage;
  * 
  */
 
-
-
-
 public class Scene {
 
-	//: Vars and constructor
-	
-	
+	//: Vars and constructor	
 	// dimensions, in tiles
 	public int height;
 	public int width;
+	
+	//ALL TILES OF SCENE GO IN HERE
 	public Tile[][] tiles;
+	
+	
 	
 	
 	
@@ -29,6 +28,13 @@ public class Scene {
 		height = y;
 		width = x;
 		sceneInit(texID);
+		
+	}
+	
+	public void resize(int x, int y){
+		height = y;
+		width = x;
+		sceneInit(Tile.STONE_2);
 		
 	}
 	

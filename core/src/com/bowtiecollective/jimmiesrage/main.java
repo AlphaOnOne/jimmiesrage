@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.bowtiecollective.jimmiesrage.scEdit.ScEdit;
 
 public class main extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -15,6 +16,13 @@ public class main extends ApplicationAdapter {
 	OrthographicCamera cam;
 	RenderScene sceneHandler;
 	Scene scene;
+	
+	
+	//Handle for scene editor
+	ScEdit scEdit;
+	
+	boolean isScEdit = false;
+	boolean canScEdit = true;
 	public void create () {
 		batch = new SpriteBatch();
 		float w = Gdx.graphics.getWidth();
@@ -29,9 +37,14 @@ public class main extends ApplicationAdapter {
         //Its temporary
         
         sceneHandler = new RenderScene();
-        scene = new Scene(20,6,Tile.DIRT_U);
+        scene = new Scene(20,6,Tile.STONE_2);
         sceneHandler.setScene(scene);
         
+        //If ScEdit is available, load er up
+        if(canScEdit){
+        	scEdit = new ScEdit();
+        	scEdit.create();
+        }
         
         
 		
@@ -45,7 +58,16 @@ public class main extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		sceneHandler.render(batch);
+		
+		
+		if(isScEdit){
+			scEdit.processInput();
+			scEdit.render(batch);
+		}else{
+			sceneHandler.render(batch);
+		}
+		
+		
 		
 		batch.end();
 		
@@ -53,6 +75,16 @@ public class main extends ApplicationAdapter {
 	}
 	
 	public void handleInput(){
+		if(Gdx.input.isKeyJustPressed(Keys.F1)){
+			if(canScEdit){
+				if(isScEdit){
+					isScEdit=false;
+				}else{
+					isScEdit=true;
+				}
+					
+			}
+		}
 		
 		if(Gdx.input.isKeyPressed(Keys.W)){
 			cam.position.add(new Vector3(0.0f,4.0f,0.0f));

@@ -5,14 +5,14 @@ import com.badlogic.gdx.graphics.Texture;
 public class Tile {
 
 	Texture tex; //64x64 ONLY
-	
+	int tid;
 	
 	
 	public Tile(int id){
-		
+		tid = id;
 		switch(id){
 		case 0:
-			tex= new Texture("dirt_u.jpg");
+			tex= new Texture("stonewall_2.bmp");
 		}
 		
 		
@@ -30,7 +30,7 @@ public class Tile {
 	 * 		-MAX
 	 */
 	
-	static int DIRT_U = 0;
+	public static int STONE_2 = 0;
 	
 	
 	
